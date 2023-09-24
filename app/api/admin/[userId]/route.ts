@@ -17,21 +17,20 @@ export async function PATCH(
 
     // Request body parsing
     const body = await req.json();
-    const { name, surname, planet, bio } = body;
+    const { name, surname, planet } = body;
 
     // Field check
-    if (!name || !surname || !planet || !bio) {
+    if (!name || !surname || !planet) {
       return new NextResponse("All fields are required", { status: 400 });
     }
 
     // Kullanıcı güncelleme
     const user = await prismadb.user.update({
-      where: { id: Number(userId) },
+      where: { id: (userId) },
       data: {
         name,
         surname,
         planet,
-        bio,
       },
     });
 
@@ -41,7 +40,6 @@ export async function PATCH(
     return new NextResponse("Internal error", { status: 500 });
   }
 }
-
 
 export async function DELETE(
   req: Request,
@@ -59,7 +57,7 @@ export async function DELETE(
   try {
     // Kullanıcı silme
     const user = await prismadb.user.delete({
-      where: { id: Number(userId) },
+      where: { id:(userId) },
     });
 
     return NextResponse.json(user);

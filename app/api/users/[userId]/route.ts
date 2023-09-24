@@ -9,7 +9,7 @@ export async function GET(
   const { userId } = params;
   try {
     const user = await prismadb.user.findUnique({
-      where: { id: Number(userId) },
+      where: { id:(userId) },
     });
     return NextResponse.json(user);
   } catch (error) {
@@ -33,7 +33,7 @@ export async function PATCH(
     }
 
     const body = await req.json();
-    const { name, surname, planet, bio } = body;
+    const { name, surname, planet } = body;
 
 
     if (!name || !surname || !planet) {
@@ -42,7 +42,7 @@ export async function PATCH(
 
 
     const user = await prismadb.user.update({
-      where: { id: Number(userId) },
+      where: { id: (userId) },
       data: {
         name,
         surname,

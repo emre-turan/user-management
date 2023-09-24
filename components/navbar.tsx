@@ -4,10 +4,14 @@ import Image from "next/image";
 import Logo from "../public/logo.png";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
-import UserAccountNav from "./user-account-nav";
+import UserActions from "./user-actions";
+import { Role } from "@/types/role";
 
 const Navbar = async () => {
   const session = await getServerSession(authOptions);
+  console.log("Session Data:", session);
+  const userRole: Role = (session?.user?.role as Role) || "guest";
+  console.log("User Role:", userRole);
   return (
     <div className=" fixed top-0 z-10 w-full border-b border-s-zinc-200 bg-zinc-100 py-2">
       <div className="container flex items-center justify-between">
@@ -15,11 +19,16 @@ const Navbar = async () => {
           <Image alt="" src={Logo} />
         </Link>
         {session?.user ? (
-          <UserAccountNav />
+          <UserActions role={userRole} />
         ) : (
-          <Link className={buttonVariants()} href="/sign-in">
-            Sign in
-          </Link>
+          <>
+            <Link className={buttonVariants()} href="/sign-in">
+              Sign in
+            </Link>
+            <Link className={buttonVariants()} href="/sign-up">
+              Sign up
+            </Link>
+          </>
         )}
       </div>
     </div>
