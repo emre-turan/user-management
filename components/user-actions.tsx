@@ -13,12 +13,12 @@ const UserActions = ({ role }: UserActionsProps) => {
   console.log("Role in UserActions:", role);
   return (
     <>
-      {role === "admin" && (
+      {role === "ADMIN" && (
         <Link href="/admin">
           <Button>Admin Panel</Button>
         </Link>
       )}
-      {role === "user" && (
+      {role === "USER" && (
         <Link href="/profile">
           <Button>Profile</Button>
         </Link>

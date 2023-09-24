@@ -2,6 +2,7 @@ import prismadb from "@/lib/prismadb";
 import { NextResponse } from "next/server";
 import { hash } from "bcrypt";
 import * as z from "zod";
+import crypto from "crypto";
 
 // Define a schema for input validation
 const userSchema = z.object({
@@ -19,7 +20,6 @@ export async function POST(req: Request) {
     const body = await req.json();
     const { email, username, password } = userSchema.parse(body);
 
-    //check if email already exists
     const existingUserByMail = await prismadb.user.findUnique({
       where: { email: email },
     });
@@ -29,7 +29,7 @@ export async function POST(req: Request) {
         { status: 409 },
       );
     }
-    //check if username already exists
+
     const existingUserByUsername = await prismadb.user.findUnique({
       where: { username: username },
     });

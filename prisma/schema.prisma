@@ -8,7 +8,7 @@ generator client {
   provider = "prisma-client-js"
 }
 
-// NextAuth.js models
+
 model Account {
   id                 String  @id @default(cuid())
   userId             String
