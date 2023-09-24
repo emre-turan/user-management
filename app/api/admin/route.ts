@@ -14,8 +14,8 @@ export async function GET(req: Request) {
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { name, surname, planet, bio, role, email } = body;
-    const requiredFields = [name, surname, planet, bio, email];
+    const { name, surname, planet, role, email } = body;
+    const requiredFields = [name, surname, planet, email];
 
     if (requiredFields.some((field) => !field)) {
       return new NextResponse(
@@ -36,7 +36,6 @@ export async function POST(req: Request) {
         name,
         surname,
         planet,
-        bio,
         role,
         email,
       },

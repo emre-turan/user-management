@@ -1,7 +1,7 @@
 import prismadb from "@/lib/prismadb";
 import { NextResponse } from "next/server";
 
-// GET için
+
 export async function GET(
   req: Request,
   { params }: { params: { userId: string } },
@@ -32,23 +32,21 @@ export async function PATCH(
       );
     }
 
-    // Request body parsing
     const body = await req.json();
     const { name, surname, planet, bio } = body;
 
-    // Field check
-    if (!name || !surname || !planet || !bio) {
+
+    if (!name || !surname || !planet) {
       return new NextResponse("All fields are required", { status: 400 });
     }
 
-    // Kullanıcı güncelleme
+
     const user = await prismadb.user.update({
       where: { id: Number(userId) },
       data: {
         name,
         surname,
         planet,
-        bio,
       },
     });
 
