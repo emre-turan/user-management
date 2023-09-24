@@ -2,7 +2,6 @@ import prismadb from "@/lib/prismadb";
 import { NextResponse } from "next/server";
 import { hash } from "bcrypt";
 import * as z from "zod";
-import crypto from "crypto";
 
 // Define a schema for input validation
 const userSchema = z.object({

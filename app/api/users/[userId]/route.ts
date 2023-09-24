@@ -1,7 +1,6 @@
 import prismadb from "@/lib/prismadb";
 import { NextResponse } from "next/server";
 
-
 export async function GET(
   req: Request,
   { params }: { params: { userId: string } },
@@ -9,7 +8,7 @@ export async function GET(
   const { userId } = params;
   try {
     const user = await prismadb.user.findUnique({
-      where: { id:(userId) },
+      where: { id: userId },
     });
     return NextResponse.json(user);
   } catch (error) {
@@ -23,7 +22,6 @@ export async function PATCH(
   { params }: { params: { userId: string } },
 ) {
   try {
-    // User ID check
     const { userId } = params;
     if (!userId) {
       return new NextResponse(
@@ -35,19 +33,14 @@ export async function PATCH(
     const body = await req.json();
     const { name, surname, planet } = body;
 
-
-    if (!name || !surname || !planet) {
-      return new NextResponse("All fields are required", { status: 400 });
-    }
-
+    const updateData: any = {};
+    if (name) updateData.name = name;
+    if (surname) updateData.surname = surname;
+    if (planet) updateData.planet = planet;
 
     const user = await prismadb.user.update({
-      where: { id: (userId) },
-      data: {
-        name,
-        surname,
-        planet,
-      },
+      where: { id: userId },
+      data: updateData,
     });
 
     return NextResponse.json(user);
