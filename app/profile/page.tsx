@@ -6,7 +6,11 @@ const UserProfile = async () => {
   const session = await getServerSession(authOptions);
 
   if (!session?.user) {
-    return <div>You are not authorized </div>;
+    return (
+      <div className="flex h-screen items-center justify-center">
+        Please sign in to view this page.
+      </div>
+    );
   }
 
   const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL || "http://localhost:3000";
