@@ -13,23 +13,31 @@ const Navbar = async () => {
   const userRole: Role = (session?.user?.role as Role) || "guest";
   console.log("User Role:", userRole);
   return (
-    <div className=" fixed top-0 z-10 w-full border-b border-s-zinc-200 bg-zinc-100 py-2">
+    <div className="fixed top-0 z-10 w-full border-b border-s-zinc-200 bg-zinc-100 py-2">
       <div className="container flex items-center justify-between">
         <Link href="/">
           <Image alt="" src={Logo} />
         </Link>
-        {session?.user ? (
-          <UserActions role={userRole} />
-        ) : (
-          <>
-            <Link className={buttonVariants()} href="/sign-in">
-              Sign in
-            </Link>
-            <Link className={buttonVariants()} href="/sign-up">
-              Sign up
-            </Link>
-          </>
-        )}
+        <div className="ml-auto">
+          {session?.user ? (
+            <UserActions role={userRole} />
+          ) : (
+            <div className="flex space-x-4">
+              <Link
+                className={buttonVariants({ variant: "link" })}
+                href="/sign-in"
+              >
+                Sign in
+              </Link>
+              <Link
+                className={buttonVariants({ variant: "link" })}
+                href="/sign-up"
+              >
+                Sign up
+              </Link>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

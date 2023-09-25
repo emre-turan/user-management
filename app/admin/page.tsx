@@ -23,18 +23,18 @@ const AdminPage = async () => {
   const users = await res.json();
 
   return (
-    <main className="container mx-auto p-4">
-      <h2 className="mb-4 text-2xl font-semibold">
+    <main className="mx-auto mt-24 max-w-7xl pb-10 sm:px-6 lg:px-8">
+      <h2 className="my-4 text-2xl font-semibold">
         Admin Dashboard - Welcome Back, {session?.user.username}
       </h2>
       <NewUserForm />
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      <div className="grid grid-cols-2 gap-4">
         {users.map((user: User) => (
           <div
             key={user.id}
             className="rounded-lg border p-4 shadow-md transition hover:shadow-lg"
           >
-            <h3 className="mb-2 text-xl font-medium">
+            <h3 className="mb-4 text-xl font-medium">
               {user.name} {user.surname}
             </h3>
             <UserProfileClient user={user} isAdmin={true} />

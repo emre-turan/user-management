@@ -2,6 +2,17 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { useToast } from "./ui/use-toast";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Button } from "./ui/button";
+import { Input } from "./ui/input";
+import { Label } from "./ui/label";
 
 interface UserProfileClientProps {
   user: any;
@@ -15,6 +26,7 @@ const UserProfileClient: React.FC<UserProfileClientProps> = ({
   const [isEditing, setIsEditing] = useState<{ [key: string]: boolean }>({});
   const [editedValue, setEditedValue] = useState<string>("");
   const router = useRouter();
+  const { toast } = useToast();
 
   const handleEdit = (fieldName: string, value: string) => {
     setIsEditing({ ...isEditing, [fieldName]: true });
@@ -29,8 +41,17 @@ const UserProfileClient: React.FC<UserProfileClientProps> = ({
     try {
       await axios.delete(`/api/admin/${user.id}`);
       router.refresh();
+      toast({
+        title: "Deleted",
+        description: "User deleted successfully.",
+      });
     } catch (error) {
       console.error("Failed to delete user", error);
+      toast({
+        title: "Error",
+        description: "Failed to delete user.",
+        variant: "destructive",
+      });
     }
   };
 
@@ -38,8 +59,17 @@ const UserProfileClient: React.FC<UserProfileClientProps> = ({
     try {
       await axios.patch(`/api/users/${user.id}`, { [fieldName]: editedValue });
       router.refresh();
+      toast({
+        title: "Success",
+        description: "User updated successfully.",
+      });
     } catch (error) {
       console.error("Failed to update user", error);
+      toast({
+        title: "Error",
+        description: "Failed to update user.",
+        variant: "destructive",
+      });
     }
     setIsEditing({ ...isEditing, [fieldName]: false });
   };
@@ -49,56 +79,95 @@ const UserProfileClient: React.FC<UserProfileClientProps> = ({
     try {
       await axios.patch(`/api/users/${user.id}`, { role: newRole });
       router.refresh();
+      toast({
+        title: "Role Updated",
+        description: "User role updated successfully.",
+      });
     } catch (error) {
       console.error("Failed to update user role", error);
+      toast({
+        description: "Failed to update user role.",
+        variant: "destructive",
+      });
     }
   };
 
+  const fields = [
+    { name: "name", label: "Name" },
+    { name: "surname", label: "Surname" },
+    { name: "planet", label: "Planet" },
+    { name: "email", label: "E-mail" },
+  ];
+
   const renderField = (fieldName: string, fieldValue: string) => (
-    <div className="">
-      {isEditing[fieldName] ? (
-        <>
-          <input
+    <div className="flex items-center">
+      <div className="flex items-center space-x-2">
+        <Label className="text-sm font-medium">
+          {fieldName.charAt(0).toUpperCase() + fieldName.slice(1)}:
+        </Label>
+        {isEditing[fieldName] ? (
+          <Input
+            className="w-32"
             defaultValue={fieldValue}
             onChange={(e) => setEditedValue(e.target.value)}
           />
-          <button onClick={() => handleSave(fieldName)}>Confirm</button>
-          <button onClick={() => handleCancel(fieldName)}>Cancel</button>
-        </>
-      ) : (
-        <>
-          {fieldValue}
-          <button onClick={() => handleEdit(fieldName, fieldValue)}>
+        ) : (
+          <span className="text-sm">{fieldValue}</span>
+        )}
+      </div>
+      <div className="ml-auto">
+        {isEditing[fieldName] ? (
+          <div className="flex space-x-2">
+            <Button variant="link" onClick={() => handleSave(fieldName)}>
+              Confirm
+            </Button>
+            <Button variant="link" onClick={() => handleCancel(fieldName)}>
+              Cancel
+            </Button>
+          </div>
+        ) : (
+          <Button
+            variant="link"
+            onClick={() => handleEdit(fieldName, fieldValue)}
+          >
             Edit
-          </button>
-        </>
-      )}
+          </Button>
+        )}
+      </div>
+    </div>
+  );
+
+  const renderRoleField = () => (
+    <div className="flex items-center">
+      <div className="flex items-center space-x-2">
+        <Label className="text-sm font-medium">Role:</Label>
+        <select
+          value={user.role}
+          onChange={handleRoleChange}
+          className="w-32 rounded border"
+        >
+          <option value="USER">USER</option>
+          <option value="ADMIN">ADMIN</option>
+        </select>
+      </div>
     </div>
   );
 
   return (
-    <div className="grid grid-cols-2 gap-4">
-      <div className="flex space-x-2">
-        <div className="font-medium">Name:</div>
-        <div>{renderField("name", user.name)}</div>
-      </div>
+    <div className="grid grid-cols-1 gap-4">
+      {fields.map((field) => (
+        <>{renderField(field.name, user[field.name])}</>
+      ))}
 
-      <div className="text-lg font-medium">Surname:</div>
-      {renderField("surname", user.surname)}
-      <div className="text-lg font-medium">Planet:</div>
-      {renderField("planet", user.planet)}
-      <div className="text-lg font-medium">Email:</div>
-      {user.email}
+      {isAdmin && renderRoleField()}
+
       {isAdmin && (
-        <>
-          <div className="text-lg font-medium">Role:</div>
-          <select value={user.role} onChange={handleRoleChange}>
-            <option value="USER">User</option>
-            <option value="ADMIN">Admin</option>
-          </select>
-        </>
+        <div className="flex justify-end">
+          <Button variant="destructive" onClick={handleDelete}>
+            Delete
+          </Button>
+        </div>
       )}
-      {isAdmin && <button onClick={handleDelete}>Delete</button>}
     </div>
   );
 };

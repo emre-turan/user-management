@@ -12,15 +12,15 @@ type UserActionsProps = {
 const UserActions = ({ role }: UserActionsProps) => {
   console.log("Role in UserActions:", role);
   return (
-    <>
+    <div className="flex space-x-4">
       {role === "ADMIN" && (
         <Link href="/admin">
-          <Button>Admin Panel</Button>
+          <Button variant="link">Admin Dashboard</Button>
         </Link>
       )}
       {role === "USER" && (
         <Link href="/profile">
-          <Button>Profile</Button>
+          <Button variant="link">User Profile</Button>
         </Link>
       )}
       <Button
@@ -30,11 +30,11 @@ const UserActions = ({ role }: UserActionsProps) => {
             callbackUrl: `${window.location.origin}/`,
           })
         }
-        variant="destructive"
+        variant="link"
       >
         Sign Out
       </Button>
-    </>
+    </div>
   );
 };
 

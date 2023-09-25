@@ -31,13 +31,14 @@ export async function PATCH(
     }
 
     const body = await req.json();
-    const { name, surname, planet, role } = body;
+    const { name, surname, planet, role, email } = body;
 
     const updateData: any = {};
     if (name) updateData.name = name;
     if (surname) updateData.surname = surname;
     if (planet) updateData.planet = planet;
     if (role) updateData.role = role.toUpperCase();
+    if (email) updateData.email = email;
 
     const user = await prismadb.user.update({
       where: { id: userId },

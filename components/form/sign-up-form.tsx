@@ -18,6 +18,7 @@ import GoogleSignInButton from "../google-sign-in-button";
 import { useToast } from "../ui/use-toast";
 import { useRouter } from "next/navigation";
 import GithubSignInButton from "../github-sign-in-button";
+import { signIn } from "next-auth/react";
 
 const FormSchema = z
   .object({
@@ -59,8 +60,28 @@ const SignUpForm = () => {
         password: values.password,
       }),
     });
+
     if (response.ok) {
-      router.push("/");
+      const signInData = await signIn("credentials", {
+        redirect: false,
+        email: values.email,
+        password: values.password,
+      });
+
+      if (!signInData?.error) {
+        toast({
+          title: "Success",
+          description: "You have successfully registered!",
+        });
+        router.refresh();
+        router.push("/");
+      } else {
+        toast({
+          title: "Error",
+          description: "An error occurred while signing in.",
+          variant: "destructive",
+        });
+      }
     } else {
       toast({
         title: "Error",
@@ -71,86 +92,88 @@ const SignUpForm = () => {
   };
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
-        <div className="space-y-2">
-          <FormField
-            control={form.control}
-            name="username"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Username</FormLabel>
-                <FormControl>
-                  <Input placeholder="johndoe" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
-                <FormControl>
-                  <Input placeholder="mail@example.com" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="password"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Password</FormLabel>
-                <FormControl>
-                  <Input
-                    type="password"
-                    placeholder="Enter your password"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="confirmPassword"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Re-Enter your password</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="Re-Enter your password"
-                    type="password"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+    <div>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
+          <div className="space-y-2">
+            <FormField
+              control={form.control}
+              name="username"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Username</FormLabel>
+                  <FormControl>
+                    <Input placeholder="johndoe" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Email</FormLabel>
+                  <FormControl>
+                    <Input placeholder="mail@example.com" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Password</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="password"
+                      placeholder="Enter your password"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="confirmPassword"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Re-Enter your password</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Re-Enter your password"
+                      type="password"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+          <Button className="mt-6 w-full" type="submit">
+            Sign up
+          </Button>
+        </form>
+        <div className="mx-auto my-4 flex w-full items-center justify-evenly before:mr-4 before:block before:h-px before:flex-grow before:bg-stone-400 after:ml-4 after:block after:h-px after:flex-grow after:bg-stone-400">
+          or
         </div>
-        <Button className="mt-6 w-full" type="submit">
-          Sign up
-        </Button>
-      </form>
-      <div className="mx-auto my-4 flex w-full items-center justify-evenly before:mr-4 before:block before:h-px before:flex-grow before:bg-stone-400 after:ml-4 after:block after:h-px after:flex-grow after:bg-stone-400">
-        or
-      </div>
-      <GoogleSignInButton>Sign Up with Google</GoogleSignInButton>
-      <GithubSignInButton>Sign Up with Github</GithubSignInButton>
-      <p className="mt-2 text-center text-sm text-gray-600">
-        If you don&apos;t have an account, please&nbsp;
-        <Link className="text-blue-500 hover:underline" href="/sign-in">
-          Sign in
-        </Link>
-      </p>
-    </Form>
+        <GoogleSignInButton>Sign Up with Google</GoogleSignInButton>
+        <GithubSignInButton>Sign Up with Github</GithubSignInButton>
+        <p className="mt-2 text-center text-sm text-gray-600">
+          If you don&apos;t have an account, please&nbsp;
+          <Link className="text-blue-500 hover:underline" href="/sign-in">
+            Sign in
+          </Link>
+        </p>
+      </Form>
+    </div>
   );
 };
 
