@@ -21,7 +21,7 @@ const UserProfile = async () => {
     <div className="mx-auto mt-24 max-w-7xl sm:px-6 lg:px-8">
       <div className="container mx-auto mt-10 max-w-xl rounded-lg p-5 shadow-md">
         <h1 className="mb-4 text-2xl font-semibold">
-          Profile Page - Welcome Back, {user?.name}
+          Profile Page - Welcome Back, {session?.user?.name}
         </h1>
         <UpdateUser user={user} />
       </div>

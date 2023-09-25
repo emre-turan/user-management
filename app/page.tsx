@@ -10,7 +10,7 @@ export default async function Home() {
   const users = await res.json();
 
   return (
-    <main className="mx-auto mt-24 max-w-7xl sm:px-6 lg:px-8">
+    <main className="mx-auto mt-24 max-w-7xl px-6 lg:px-8">
       <h1 className="mb-4 text-2xl font-semibold">All Users</h1>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
         {users.map(
