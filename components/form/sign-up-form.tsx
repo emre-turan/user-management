@@ -19,6 +19,7 @@ import { useToast } from "../ui/use-toast";
 import { useRouter } from "next/navigation";
 import GithubSignInButton from "../github-sign-in-button";
 import { signIn } from "next-auth/react";
+import { CardDescription, CardHeader, CardTitle } from "../ui/card";
 
 const FormSchema = z
   .object({
@@ -95,8 +96,20 @@ const SignUpForm = () => {
   };
 
   return (
-    <div className="pt-10">
+    <div className="mt-24 w-[400px] rounded-lg border px-6 py-8 shadow-xl">
       <Form {...form}>
+        <CardHeader className="space-y-1">
+          <CardTitle className="text-2xl">Create an account</CardTitle>
+        </CardHeader>
+
+        <div className="grid grid-cols-2 gap-6">
+          <GoogleSignInButton>Sign Up</GoogleSignInButton>
+          <GithubSignInButton>Sign Up</GithubSignInButton>
+        </div>
+
+        <div className="mx-auto my-4 flex w-full items-center justify-evenly text-sm text-muted-foreground before:mr-4 before:block before:h-px before:flex-grow before:bg-stone-400 after:ml-4 after:block after:h-px  after:flex-grow after:bg-stone-400">
+          or continue with
+        </div>
         <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
           <div className="space-y-2">
             <FormField
@@ -175,16 +188,11 @@ const SignUpForm = () => {
             />
           </div>
           <Button className="mt-6 w-full" type="submit">
-            Sign up
+            Create Account
           </Button>
         </form>
-        <div className="mx-auto my-4 flex w-full items-center justify-evenly before:mr-4 before:block before:h-px before:flex-grow before:bg-stone-400 after:ml-4 after:block after:h-px after:flex-grow after:bg-stone-400">
-          or
-        </div>
-        <GoogleSignInButton>Sign Up with Google</GoogleSignInButton>
-        <GithubSignInButton>Sign Up with Github</GithubSignInButton>
-        <p className="mt-2 text-center text-sm text-gray-600">
-          If you don&apos;t have an account, please&nbsp;
+        <p className="mt-2 text-center text-sm text-muted-foreground ">
+          Do you have an account? Please&nbsp;
           <Link className="text-blue-500 hover:underline" href="/sign-in">
             Sign in
           </Link>

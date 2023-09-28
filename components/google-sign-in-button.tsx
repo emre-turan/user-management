@@ -1,3 +1,4 @@
+import { Icons } from "@/components/icons";
 import { FC, ReactNode } from "react";
 import { Button } from "./ui/button";
 import { signIn } from "next-auth/react";
@@ -11,6 +12,7 @@ const GoogleSignInButton: FC<GoogleSignInButtonProps> = ({ children }) => {
 
   return (
     <Button onClick={loginWithGoogle} className="w-full">
+      <Icons.google className="mr-2 h-4 w-4" />
       {children}
     </Button>
   );

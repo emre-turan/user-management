@@ -1,3 +1,4 @@
+import { Icons } from "@/components/icons";
 import { FC, ReactNode } from "react";
 import { Button } from "./ui/button";
 import { signIn } from "next-auth/react";
@@ -10,7 +11,8 @@ const GithubSignInButton: FC<GithubSignInButtonProps> = ({ children }) => {
     signIn("github", { callbackUrl: "http://localhost:3000/" });
 
   return (
-    <Button onClick={loginWithGithub} className="mt-2 w-full">
+    <Button onClick={loginWithGithub} className=" w-full">
+      <Icons.gitHub className="mr-2 h-4 w-4" />
       {children}
     </Button>
   );
