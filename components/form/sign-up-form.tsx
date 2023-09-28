@@ -22,7 +22,6 @@ import { signIn } from "next-auth/react";
 
 const FormSchema = z
   .object({
-    username: z.string().min(1, "Username is required").max(100),
     name: z.string().min(1, "Name is required").max(100),
     surname: z.string().min(1, "Surname is required").max(100),
     email: z.string().min(1, "Email is required").email("Invalid email"),
@@ -45,7 +44,6 @@ const SignUpForm = () => {
     defaultValues: {
       name: "",
       surname: "",
-      username: "",
       email: "",
       password: "",
       confirmPassword: "",
@@ -61,7 +59,6 @@ const SignUpForm = () => {
       body: JSON.stringify({
         name: values.name,
         surname: values.surname,
-        username: values.username,
         email: values.email,
         password: values.password,
       }),
@@ -128,19 +125,7 @@ const SignUpForm = () => {
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name="username"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Username</FormLabel>
-                  <FormControl>
-                    <Input placeholder="johndoe" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+
             <FormField
               control={form.control}
               name="email"

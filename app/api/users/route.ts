@@ -5,7 +5,6 @@ import * as z from "zod";
 
 // Define a schema for input validation
 const userSchema = z.object({
-  username: z.string().min(1, "Username is required").max(100),
   name: z.string().min(1, "Name is required").max(100),
   surname: z.string().min(1, "Surname is required").max(100),
   email: z.string().min(1, "Email is required").email("Invalid email"),
@@ -19,7 +18,7 @@ const userSchema = z.object({
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { email, username, password, name, surname } = userSchema.parse(body);
+    const { email, password, name, surname } = userSchema.parse(body);
 
     const existingUserByMail = await prismadb.user.findUnique({
       where: { email: email },
@@ -31,21 +30,11 @@ export async function POST(req: Request) {
       );
     }
 
-    const existingUserByUsername = await prismadb.user.findUnique({
-      where: { username: username },
-    });
-    if (existingUserByUsername) {
-      return NextResponse.json(
-        { user: null, message: "Username already exists" },
-        { status: 409 },
-      );
-    }
     const hashPassword = await hash(password, 10);
     const newUser = await prismadb.user.create({
       data: {
         name,
         surname,
-        username,
         email,
         password: hashPassword,
       },

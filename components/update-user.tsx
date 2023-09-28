@@ -6,16 +6,7 @@ import { useToast } from "./ui/use-toast";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
+import AlertModal from "./alert-modal";
 
 interface UserProfileClientProps {
   user: any;
@@ -161,31 +152,8 @@ const UserProfileClient: React.FC<UserProfileClientProps> = ({
       {fields.map((field) => (
         <>{renderField(field.name, user[field.name])}</>
       ))}
-
       {isAdmin && renderRoleField()}
-
-      {isAdmin && (
-        <div className="flex justify-end">
-          <AlertDialog>
-            <AlertDialogTrigger asChild>
-              <Button variant="destructive">Delete</Button>
-            </AlertDialogTrigger>
-            <AlertDialogContent>
-              <AlertDialogHeader>
-                <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-                <AlertDialogDescription>
-                  This action cannot be undone. This will permanently delete
-                  this user.
-                </AlertDialogDescription>
-              </AlertDialogHeader>
-              <AlertDialogAction onClick={handleDelete}>
-                Delete
-              </AlertDialogAction>
-              <AlertDialogCancel>Cancel</AlertDialogCancel>
-            </AlertDialogContent>
-          </AlertDialog>
-        </div>
-      )}
+      {isAdmin && <AlertModal onClick={handleDelete} />}
     </div>
   );
 };
