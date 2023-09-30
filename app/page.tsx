@@ -4,7 +4,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
-
   const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL || "http://localhost:3000";
   const res = await fetch(`${baseUrl}/api/users`);
   const users = await res.json();

@@ -20,6 +20,7 @@ const UserProfileClient: React.FC<UserProfileClientProps> = ({
   const [isEditing, setIsEditing] = useState<{ [key: string]: boolean }>({});
   const [editedValue, setEditedValue] = useState<string>("");
   const router = useRouter();
+
   const { toast } = useToast();
 
   const handleEdit = (fieldName: string, value: string) => {

@@ -10,7 +10,6 @@ type UserActionsProps = {
 };
 
 const UserActions = ({ role }: UserActionsProps) => {
-  console.log("Role in UserActions:", role);
   return (
     <div className="flex space-x-4">
       {role === "ADMIN" && (

@@ -23,6 +23,7 @@ const NewUserForm: React.FC = () => {
     email: "",
   });
 
+
   const inputFields = [
     { name: "name", placeholder: "Name", type: "text" },
     { name: "surname", placeholder: "Surname", type: "text" },
