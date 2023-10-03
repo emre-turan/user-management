@@ -19,7 +19,7 @@ const AlertModal: React.FC<AlertModalProps> = ({ onClick }) => {
     <div className="flex justify-end">
       <AlertDialog>
         <AlertDialogTrigger asChild>
-          <Button variant="destructive">Delete</Button>
+          <Button variant="destructive">Delete User</Button>
         </AlertDialogTrigger>
         <AlertDialogContent>
           <AlertDialogHeader>
@@ -29,7 +29,12 @@ const AlertModal: React.FC<AlertModalProps> = ({ onClick }) => {
               user.
             </AlertDialogDescription>
           </AlertDialogHeader>
-          <AlertDialogAction onClick={onClick}>Delete</AlertDialogAction>
+          <AlertDialogAction
+            onClick={onClick}
+            className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+          >
+            Delete
+          </AlertDialogAction>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
         </AlertDialogContent>
       </AlertDialog>

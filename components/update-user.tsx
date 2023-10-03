@@ -139,7 +139,7 @@ const UserProfileClient: React.FC<UserProfileClientProps> = ({
     </div>
   );
 
-  const renderRoleField = () => (
+  const renderRoleField = ( ) => (
     <div className="flex items-center">
       <div className="flex items-center space-x-3">
         <Label className="text-sm font-medium">Role:</Label>
