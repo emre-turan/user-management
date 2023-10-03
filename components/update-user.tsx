@@ -7,6 +7,14 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import AlertModal from "./alert-modal";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./ui/select";
 
 interface UserProfileClientProps {
   user: any;
@@ -69,8 +77,7 @@ const UserProfileClient: React.FC<UserProfileClientProps> = ({
     setIsEditing({ ...isEditing, [fieldName]: false });
   };
 
-  const handleRoleChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const newRole = e.target.value;
+  const handleRoleChange = async (newRole: string) => {
     try {
       await axios.patch(`/api/users/${user.id}`, { role: newRole });
       router.refresh();
@@ -134,16 +141,19 @@ const UserProfileClient: React.FC<UserProfileClientProps> = ({
 
   const renderRoleField = () => (
     <div className="flex items-center">
-      <div className="flex items-center space-x-2">
+      <div className="flex items-center space-x-3">
         <Label className="text-sm font-medium">Role:</Label>
-        <select
-          value={user.role}
-          onChange={handleRoleChange}
-          className="w-32 rounded border"
-        >
-          <option value="USER">USER</option>
-          <option value="ADMIN">ADMIN</option>
-        </select>
+        <Select value={user.role} onValueChange={handleRoleChange}>
+          <SelectTrigger className="w-[120px]">
+            <SelectValue placeholder="Select a role" />
+          </SelectTrigger>
+          <SelectGroup>
+            <SelectContent>
+              <SelectItem value="USER">USER</SelectItem>
+              <SelectItem value="ADMIN">ADMIN</SelectItem>
+            </SelectContent>
+          </SelectGroup>
+        </Select>
       </div>
     </div>
   );
