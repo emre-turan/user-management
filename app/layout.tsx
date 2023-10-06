@@ -8,8 +8,9 @@ import Provider from "@/components/provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Wopee",
-  description: "Wopee is the autonomous testing platform.",
+  title: "User Management App",
+  description:
+    "This app is a user management app built with Next.js for highlight my skills in React, TypeScript, and Next.js.",
 };
 
 export default function RootLayout({
