@@ -6,6 +6,7 @@ export default async function Home() {
   const session = await getServerSession(authOptions);
   const baseUrl = process.env.NEXTAUTH_URL;
   const res = await fetch(`${baseUrl}/api/users`);
+  console.log("NEXTAUTH_URL:", process.env.NEXTAUTH_URL);
   const users = await res.json();
 
   return (
