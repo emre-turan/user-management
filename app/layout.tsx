@@ -8,7 +8,7 @@ import Provider from "@/components/provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "User Management App",
+  title: "User Management App.",
   description:
     "This app is a user management app built with Next.js for highlight my skills in React, TypeScript, and Next.js.",
 };
