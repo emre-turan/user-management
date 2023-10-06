@@ -170,3 +170,5 @@ const UserProfileClient: React.FC<UserProfileClientProps> = ({
 };
 
 export default UserProfileClient;
+
+
