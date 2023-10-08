@@ -102,8 +102,8 @@ const SignUpForm = () => {
         </CardHeader>
 
         <div className="grid grid-cols-2 gap-6">
-          <AuthProviderButton provider="github">Sign In</AuthProviderButton>
-          <AuthProviderButton provider="google">Sign In</AuthProviderButton>
+          <AuthProviderButton provider="github">Sign Up</AuthProviderButton>
+          <AuthProviderButton provider="google">Sign Up</AuthProviderButton>
         </div>
 
         <div className="mx-auto my-4 flex w-full items-center justify-evenly text-sm text-muted-foreground before:mr-4 before:block before:h-px before:flex-grow before:bg-stone-400 after:ml-4 after:block after:h-px  after:flex-grow after:bg-stone-400">
