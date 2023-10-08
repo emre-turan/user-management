@@ -11,7 +11,12 @@ export default async function Home() {
 
   return (
     <main className="mx-auto mt-24 max-w-7xl px-6 lg:px-8">
-      <h1 className="mb-4 pt-4 text-2xl font-semibold">All Users</h1>
+      <h1 className="pt-4 text-2xl font-semibold">
+        Welcome to User Management App
+      </h1>
+      <h2 className="mb-4 pt-4 text-lg text-muted-foreground">
+        You can see the all users listed in here
+      </h2>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
         {users.map(
           (user: {
@@ -26,7 +31,7 @@ export default async function Home() {
               className="rounded-lg p-4 transition duration-300 hover:shadow-lg"
             >
               <CardHeader>
-                <CardTitle>
+                <CardTitle className="mx-5">
                   {user.name} {user.surname}
                 </CardTitle>
               </CardHeader>
