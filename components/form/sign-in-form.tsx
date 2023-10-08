@@ -14,12 +14,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import Link from "next/link";
-import GoogleSignInButton from "../google-sign-in-button";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import GithubSignInButton from "../github-sign-in-button";
 import { useToast } from "@/components/ui/use-toast";
 import { CardHeader, CardTitle } from "../ui/card";
+import AuthProviderButton from "../auth-provider-buttons";
 
 const FormSchema = z.object({
   email: z.string().min(1, "Email is required").email("Invalid email"),
@@ -106,8 +105,8 @@ const SignInForm = () => {
         </div>
 
         <div className="grid grid-cols-2 gap-6">
-          <GoogleSignInButton>Sign In</GoogleSignInButton>
-          <GithubSignInButton>Sign In</GithubSignInButton>
+          <AuthProviderButton provider="github">Sign In</AuthProviderButton>
+          <AuthProviderButton provider="google">Sign In</AuthProviderButton>
         </div>
 
         <p className="mt-2 text-center text-sm text-gray-600">

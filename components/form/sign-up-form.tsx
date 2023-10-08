@@ -14,12 +14,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import Link from "next/link";
-import GoogleSignInButton from "../google-sign-in-button";
 import { useToast } from "../ui/use-toast";
 import { useRouter } from "next/navigation";
-import GithubSignInButton from "../github-sign-in-button";
 import { signIn } from "next-auth/react";
 import { CardDescription, CardHeader, CardTitle } from "../ui/card";
+import AuthProviderButton from "../auth-provider-buttons";
 
 const FormSchema = z
   .object({
@@ -103,8 +102,8 @@ const SignUpForm = () => {
         </CardHeader>
 
         <div className="grid grid-cols-2 gap-6">
-          <GoogleSignInButton>Sign Up</GoogleSignInButton>
-          <GithubSignInButton>Sign Up</GithubSignInButton>
+          <AuthProviderButton provider="github">Sign In</AuthProviderButton>
+          <AuthProviderButton provider="google">Sign In</AuthProviderButton>
         </div>
 
         <div className="mx-auto my-4 flex w-full items-center justify-evenly text-sm text-muted-foreground before:mr-4 before:block before:h-px before:flex-grow before:bg-stone-400 after:ml-4 after:block after:h-px  after:flex-grow after:bg-stone-400">
