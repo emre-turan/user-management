@@ -4,6 +4,7 @@ import { signOut } from "next-auth/react";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import { Role } from "@/types/role";
+import { LogOut } from "lucide-react";
 
 type UserActionsProps = {
   role: Role;
@@ -29,9 +30,9 @@ const UserActions = ({ role }: UserActionsProps) => {
             callbackUrl: `${window.location.origin}/`,
           })
         }
-        variant="link"
       >
         Sign Out
+        <LogOut className="ml-2 hover:animate-pulse" size={16} />
       </Button>
     </div>
   );

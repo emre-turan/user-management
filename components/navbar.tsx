@@ -15,7 +15,7 @@ const SignInOrSignUpButtons = () => {
       </Link>
       <Link className={buttonVariants()} href="/sign-up">
         Sign Up
-        <LogIn className="ml-1 animate-pulse" size={16} />
+        <LogIn className="ml-2 animate-pulse" size={16} />
       </Link>
     </div>
   );
