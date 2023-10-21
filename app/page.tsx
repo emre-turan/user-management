@@ -1,6 +1,6 @@
 import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import UserCard from "@/components/user-card";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
@@ -26,22 +26,7 @@ export default async function Home() {
             planet: string;
             email: string;
           }) => (
-            <Card
-              key={user.id}
-              className="rounded-lg p-4 transition duration-300 hover:shadow-lg"
-            >
-              <CardHeader>
-                <CardTitle className="mx-5">
-                  {user.name} {user.surname}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-gray-600">Planet: {user.planet}</p>
-              </CardContent>
-              <CardContent>
-                <p className="text-sm text-gray-600">Mail: {user.email}</p>
-              </CardContent>
-            </Card>
+            <UserCard key={user.id} {...user} />
           ),
         )}
       </div>

@@ -15,6 +15,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
+import { Check, Edit, X } from "lucide-react";
+import { Separator } from "./ui/separator";
 
 interface UserProfileClientProps {
   user: any;
@@ -102,9 +104,9 @@ const UserProfileClient: React.FC<UserProfileClientProps> = ({
   ];
 
   const renderField = (fieldName: string, fieldValue: string) => (
-    <div className="flex items-center">
+    <div className="flex items-center space-y-2">
       <div className="flex items-center space-x-2">
-        <Label className="text-sm font-medium">
+        <Label className="text-sm font-medium" htmlFor={fieldName}>
           {fieldName.charAt(0).toUpperCase() + fieldName.slice(1)}:
         </Label>
         {isEditing[fieldName] ? (
@@ -119,29 +121,37 @@ const UserProfileClient: React.FC<UserProfileClientProps> = ({
       </div>
       <div className="ml-auto">
         {isEditing[fieldName] ? (
-          <div className="flex space-x-2">
-            <Button variant="link" onClick={() => handleSave(fieldName)}>
-              Confirm
+          <div className="flex">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => handleSave(fieldName)}
+            >
+              <Check size={16} />
             </Button>
-            <Button variant="link" onClick={() => handleCancel(fieldName)}>
-              Cancel
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => handleCancel(fieldName)}
+            >
+              <X size={16} />
             </Button>
           </div>
         ) : (
           <Button
-            variant="link"
+            variant="ghost"
             onClick={() => handleEdit(fieldName, fieldValue)}
           >
-            Edit
+            <Edit className="ml-2" size={16} />
           </Button>
         )}
       </div>
     </div>
   );
 
-  const renderRoleField = ( ) => (
+  const renderRoleField = () => (
     <div className="flex items-center">
-      <div className="flex items-center space-x-3">
+      <div className="flex items-center space-x-2">
         <Label className="text-sm font-medium">Role:</Label>
         <Select value={user.role} onValueChange={handleRoleChange}>
           <SelectTrigger className="w-[120px]">
@@ -159,16 +169,17 @@ const UserProfileClient: React.FC<UserProfileClientProps> = ({
   );
 
   return (
-    <div className="grid grid-cols-1 gap-4">
+    <>
       {fields.map((field) => (
         <>{renderField(field.name, user[field.name])}</>
       ))}
-      {isAdmin && renderRoleField()}
-      {isAdmin && <AlertModal onClick={handleDelete} />}
-    </div>
+      {isAdmin && <Separator />}
+      <div className="mt-4 flex justify-between">
+        {isAdmin && renderRoleField()}
+        {isAdmin && <AlertModal onClick={handleDelete} />}
+      </div>
+    </>
   );
 };
 
 export default UserProfileClient;
-
-

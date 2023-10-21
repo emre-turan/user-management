@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useToast } from "./ui/use-toast";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
+import { UserPlus } from "lucide-react";
 
 type UserFields = {
   name: string;
@@ -22,7 +23,6 @@ const NewUserForm: React.FC = () => {
     planet: "",
     email: "",
   });
-
 
   const inputFields = [
     { name: "name", placeholder: "Name", type: "text" },
@@ -65,7 +65,7 @@ const NewUserForm: React.FC = () => {
     <div className="mb-4 rounded-lg border p-4">
       <div className="flex justify-center">
         <form className="flex max-w-md flex-wrap justify-center space-y-2">
-          <h3 className="mb-2 text-lg font-medium">Add New User</h3>
+          <h3 className="text-lg font-medium">Add New User</h3>
           {inputFields.map((field) => (
             <Input
               key={field.name}
@@ -78,6 +78,7 @@ const NewUserForm: React.FC = () => {
           ))}
           <Button type="button" onClick={handleSubmit} className="w-full">
             Add User
+            <UserPlus className="ml-2" size={16} />
           </Button>
         </form>
       </div>

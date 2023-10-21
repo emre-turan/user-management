@@ -1,32 +1,21 @@
 import Link from "next/link";
 import { buttonVariants } from "./ui/button";
-import Image from "next/image";
-import Logo from "../public/SF Pro Bold Light - v2.svg";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import UserActions from "./user-actions";
 import { Role } from "@/types/role";
-
-const AppLogo = () => {
-  return (
-    <div className="absolute">
-      <div className="relative h-28 w-28">
-        <Link href="/">
-          <Image alt="application logo" src={Logo} />
-        </Link>
-      </div>
-    </div>
-  );
-};
+import { LogIn } from "lucide-react";
+import { AppLogo } from "./app-logo";
 
 const SignInOrSignUpButtons = () => {
   return (
     <div className="flex space-x-4">
       <Link className={buttonVariants({ variant: "link" })} href="/sign-in">
-        Sign in
+        Sign In
       </Link>
       <Link className={buttonVariants()} href="/sign-up">
-        Sign up
+        Sign Up
+        <LogIn className="ml-1 animate-pulse" size={16} />
       </Link>
     </div>
   );

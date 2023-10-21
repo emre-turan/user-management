@@ -1,6 +1,7 @@
 import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
 import UpdateUser from "@/components/update-user";
+import Container from "@/components/container";
 
 const UserProfile = async () => {
   const session = await getServerSession(authOptions);
@@ -18,14 +19,19 @@ const UserProfile = async () => {
   const user = await res.json();
 
   return (
-    <div className="mx-auto mt-24 max-w-7xl sm:px-6 lg:px-8">
-      <div className="container mx-auto mt-10 max-w-xl rounded-lg p-5 shadow-md">
-        <h1 className="mb-4 text-2xl font-semibold">
-          Profile Page - Welcome Back, {session?.user?.name}
-        </h1>
-        <UpdateUser user={user} />
+    <Container>
+      <div className="mt-24">
+        <div className="p-2">
+          <h1 className="mb-2 text-2xl font-semibold">Profile Page</h1>
+          <h2 className="mb-4 text-muted-foreground">
+            Welcome Back, {session?.user?.name}
+          </h2>
+        </div>
+        <div className="rounded-lg border p-4 shadow-md transition hover:shadow-lg">
+          <UpdateUser user={user} />
+        </div>
       </div>
-    </div>
+    </Container>
   );
 };
 

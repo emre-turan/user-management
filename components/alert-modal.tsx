@@ -9,6 +9,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "./ui/button";
+import { Trash } from "lucide-react";
 
 interface AlertModalProps {
   onClick: () => void;
@@ -19,7 +20,9 @@ const AlertModal: React.FC<AlertModalProps> = ({ onClick }) => {
     <div className="flex justify-end">
       <AlertDialog>
         <AlertDialogTrigger asChild>
-          <Button variant="destructive">Delete User</Button>
+          <Button variant="destructive" size="sm">
+            Delete User <Trash size={16} className="ml-2" />
+          </Button>
         </AlertDialogTrigger>
         <AlertDialogContent>
           <AlertDialogHeader>
