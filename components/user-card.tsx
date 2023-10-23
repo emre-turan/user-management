@@ -30,7 +30,7 @@ const UserCard: React.FC<UserProps> = ({ name, surname, planet, email }) => {
             <Mail className="h-5 w-4" />
             Email:
           </p>
-          <p className="text-sm">{email}</p>
+          <p className="overflow-x-hidden text-sm">{email}</p>
         </CardContent>
       </Card>
     </>

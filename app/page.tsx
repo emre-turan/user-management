@@ -10,7 +10,7 @@ export default async function Home() {
   const users = await res.json();
 
   return (
-    <main className="container mx-auto mt-24 max-w-7xl px-6 lg:px-8">
+    <main className="container mx-auto mt-28 max-w-7xl px-6 lg:px-8">
       <div className="p-2">
         <h1 className="mb-2 text-2xl font-semibold">
           Welcome to User Management App

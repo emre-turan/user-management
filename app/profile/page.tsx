@@ -20,7 +20,7 @@ const UserProfile = async () => {
 
   return (
     <Container>
-      <div className="mt-24">
+      <div className="mt-28">
         <div className="p-2">
           <h1 className="mb-2 text-2xl font-semibold">Profile Page</h1>
           <h2 className="mb-4 text-muted-foreground">

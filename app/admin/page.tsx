@@ -12,6 +12,7 @@ interface User {
   surname: string;
   planet: string;
   mail: string;
+  image: string;
 }
 
 const AdminPage = async () => {
@@ -31,7 +32,7 @@ const AdminPage = async () => {
 
   return (
     <Container>
-      <div className="mt-24 pb-6">
+      <div className="mt-28 pb-6">
         <h1 className="mb-2 mt-4 text-2xl font-semibold">Admin Dashboard</h1>
         <h2 className="mb-4 text-muted-foreground">
           Welcome Back, {session?.user.name}
