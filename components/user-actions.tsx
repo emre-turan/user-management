@@ -10,7 +10,8 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+
+import UserAvatar from "./user-avatar";
 
 type UserActionsProps = {
   role: Role;
@@ -19,18 +20,10 @@ type UserActionsProps = {
 };
 
 const UserActions = ({ role, name, surname }: UserActionsProps) => {
-  const initials = `${name?.charAt(0) || "E"}${
-    surname?.charAt(0) || "T"
-  }`.toUpperCase();
-
   return (
     <Popover>
       <PopoverTrigger>
-        <Avatar>
-          <AvatarFallback className="bg-black text-muted">
-            {initials}
-          </AvatarFallback>
-        </Avatar>
+        <UserAvatar name={name} surname={surname} />
       </PopoverTrigger>
       <PopoverContent>
         <div className="flex flex-col space-x-4 ">

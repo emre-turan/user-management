@@ -24,7 +24,6 @@ const SignInOrSignUpButtons = () => {
 const Navbar = async () => {
   const session = await getServerSession(authOptions);
   const userRole: Role = (session?.user?.role as Role) || "guest";
-  console.log(session);
   return (
     <div className="fixed top-0 z-10 w-full border-b border-s-zinc-200 bg-zinc-100 py-6">
       <div className="container flex items-center justify-between">
