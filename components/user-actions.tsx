@@ -4,26 +4,31 @@ import { signOut } from "next-auth/react";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import { Role } from "@/types/role";
-import { Loader, Lock, LogOut, User } from "lucide-react";
+import { Lock, LogOut, User } from "lucide-react";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 type UserActionsProps = {
   role: Role;
+  name?: string;
+  surname?: string;
 };
 
-const UserActions = ({ role }: UserActionsProps) => {
+const UserActions = ({ role, name, surname }: UserActionsProps) => {
+  const initials = `${name?.charAt(0) || "E"}${
+    surname?.charAt(0) || "T"
+  }`.toUpperCase();
+
   return (
     <Popover>
       <PopoverTrigger>
         <Avatar>
-          <AvatarImage src="https://github.com/shadcn.png" />
-          <AvatarFallback>
-            <Loader className="animate-spin" size={16} />
+          <AvatarFallback className="bg-black text-muted">
+            {initials}
           </AvatarFallback>
         </Avatar>
       </PopoverTrigger>
