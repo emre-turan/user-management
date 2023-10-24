@@ -1,12 +1,13 @@
 "use client";
+
 import React, { useState } from "react";
-import axios from "axios";
 import { useRouter } from "next/navigation";
+import axios from "axios";
+
 import { useToast } from "./ui/use-toast";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
-import AlertModal from "./alert-modal";
 import {
   Select,
   SelectContent,
@@ -15,22 +16,20 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
-import { Check, Edit, X } from "lucide-react";
 import { Separator } from "./ui/separator";
 
-interface UserProfileClientProps {
+import AlertModal from "./alert-modal";
+import { Check, Edit, X } from "lucide-react";
+
+interface UpdateUserProps {
   user: any;
   isAdmin?: boolean;
 }
 
-const UserProfileClient: React.FC<UserProfileClientProps> = ({
-  user,
-  isAdmin,
-}) => {
+const UpdateUser: React.FC<UpdateUserProps> = ({ user, isAdmin }) => {
   const [isEditing, setIsEditing] = useState<{ [key: string]: boolean }>({});
   const [editedValue, setEditedValue] = useState<string>("");
   const router = useRouter();
-
   const { toast } = useToast();
 
   const handleEdit = (fieldName: string, value: string) => {
@@ -182,4 +181,4 @@ const UserProfileClient: React.FC<UserProfileClientProps> = ({
   );
 };
 
-export default UserProfileClient;
+export default UpdateUser;
