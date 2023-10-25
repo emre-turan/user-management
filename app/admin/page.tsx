@@ -52,10 +52,6 @@ const AdminPage = async () => {
                   key={user.id}
                   className="rounded-lg border p-4 shadow-md transition hover:shadow-lg"
                 >
-                  <h3 className="mb-4 text-xl font-medium">
-                    {user.name} {user.surname}
-                  </h3>
-                  <Separator />
                   <UpdateUser user={user} isAdmin={true} />
                 </div>
               ))}
