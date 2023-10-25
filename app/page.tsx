@@ -16,7 +16,11 @@ export default async function Home() {
           Welcome to User Management App
         </h1>
         <h2 className="mb-4 text-sm text-muted-foreground">
-          You can see the all users listed in here
+          The application allows users to edit their own profiles, view other
+          users&apos; profiles, and provides admin functionalities to manage all
+          users. Developed with modern technologies and best practices, this
+          project serves as a comprehensive example of a full-stack application
+          to demonstrate my technical skills and experience.
         </h2>
       </div>
 

@@ -26,21 +26,22 @@ const UserActions = ({ role, name, surname }: UserActionsProps) => {
         <UserAvatar name={name} surname={surname} />
       </PopoverTrigger>
       <PopoverContent>
-        <div className="flex flex-col space-x-4 ">
+        <div className="flex flex-col space-x-4">
           {role === "ADMIN" && (
             <Link href="/admin">
               <Button variant="link">
-                Admin Dashboard <Lock className="ml-1" size={16} />
+                Admin Dashboard <Lock className="ml-2" size={16} />
               </Button>
             </Link>
           )}
           {role === "USER" && (
             <Link href="/profile">
               <Button variant="link">
-                User Profile <User className="ml-1" size={16} />
+                User Profile <User className="ml-2" size={16} />
               </Button>
             </Link>
           )}
+
           <Button
             className="flex justify-start px-0 "
             variant="link"
@@ -52,7 +53,7 @@ const UserActions = ({ role, name, surname }: UserActionsProps) => {
             }
           >
             Sign Out
-            <LogOut className="ml-1 hover:animate-pulse" size={16} />
+            <LogOut className="ml-2 hover:animate-pulse" size={16} />
           </Button>
         </div>
       </PopoverContent>

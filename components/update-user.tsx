@@ -17,6 +17,12 @@ import {
   SelectValue,
 } from "./ui/select";
 import { Separator } from "./ui/separator";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 import AlertModal from "./alert-modal";
 import { Check, Edit, X } from "lucide-react";
@@ -169,14 +175,23 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ user, isAdmin }) => {
 
   return (
     <>
-      {fields.map((field) => (
-        <>{renderField(field.name, user[field.name])}</>
-      ))}
-      {isAdmin && <Separator />}
-      <div className="mt-4 flex justify-between">
-        {isAdmin && renderRoleField()}
-        {isAdmin && <AlertModal onClick={handleDelete} />}
-      </div>
+      <Accordion type="single" collapsible className="w-full">
+        <AccordionItem value="item-1">
+          <AccordionTrigger className="text-sm text-muted-foreground">
+            Click for the User Details
+          </AccordionTrigger>
+          <AccordionContent>
+            {fields.map((field) => (
+              <>{renderField(field.name, user[field.name])}</>
+            ))}
+            {isAdmin && <Separator />}
+            <div className="mt-4 flex justify-between">
+              {isAdmin && renderRoleField()}
+              {isAdmin && <AlertModal onClick={handleDelete} />}
+            </div>
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
     </>
   );
 };
