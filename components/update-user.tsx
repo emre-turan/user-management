@@ -35,19 +35,20 @@ interface UpdateUserProps {
 const UpdateUser: React.FC<UpdateUserProps> = ({ user, isAdmin }) => {
   const [isEditing, setIsEditing] = useState<{ [key: string]: boolean }>({});
   const [editedValue, setEditedValue] = useState<string>("");
+
   const router = useRouter();
   const { toast } = useToast();
 
-  const handleEdit = (fieldName: string, value: string) => {
+  function handleEdit(fieldName: string, value: string) {
     setIsEditing({ ...isEditing, [fieldName]: true });
     setEditedValue(value);
-  };
+  }
 
-  const handleCancel = (fieldName: string) => {
+  function handleCancel(fieldName: string) {
     setIsEditing({ ...isEditing, [fieldName]: false });
-  };
+  }
 
-  const handleDelete = async () => {
+  async function handleDelete() {
     try {
       await axios.delete(`/api/admin/${user.id}`);
       router.refresh();
@@ -63,9 +64,9 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ user, isAdmin }) => {
         variant: "destructive",
       });
     }
-  };
+  }
 
-  const handleSave = async (fieldName: string) => {
+  async function handleSave(fieldName: string) {
     try {
       await axios.patch(`/api/users/${user.id}`, { [fieldName]: editedValue });
       router.refresh();
@@ -82,9 +83,9 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ user, isAdmin }) => {
       });
     }
     setIsEditing({ ...isEditing, [fieldName]: false });
-  };
+  }
 
-  const handleRoleChange = async (newRole: string) => {
+  async function handleRoleChange(newRole: string) {
     try {
       await axios.patch(`/api/users/${user.id}`, { role: newRole });
       router.refresh();
@@ -99,7 +100,7 @@ const UpdateUser: React.FC<UpdateUserProps> = ({ user, isAdmin }) => {
         variant: "destructive",
       });
     }
-  };
+  }
 
   const fields = [
     { name: "name", label: "Name" },
