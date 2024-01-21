@@ -22,7 +22,8 @@ export default async function Home() {
             users&apos; profiles, and provides admin functionalities to manage
             all users. Developed with modern technologies and best practices,
             this project serves as a comprehensive example of a full-stack
-            application to demonstrate my technical skills and experience.
+            application to
+            <strong> demonstrate my technical skills and experience.</strong>
           </h2>
         </div>
 
